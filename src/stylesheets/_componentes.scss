@@ -1,0 +1,381 @@
+// ---------- Encabezado de página por sección ----------
+.encabezado {
+  --color: var(--c-cuenta);
+  --color-fondo: var(--c-cuenta-fondo);
+  background: var(--color-fondo);
+  border-left: 6px solid var(--color);
+  border-radius: var(--radio);
+  padding: 16px 20px 18px;
+
+  @each $s in pagar, historial, movimientos, beneficios, banco, cuenta, ayuda {
+    &--#{$s} { --color: var(--c-#{$s}); --color-fondo: var(--c-#{$s}-fondo); }
+  }
+}
+
+.encabezado__fila { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+
+.encabezado__icono {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color);
+  color: #fff;
+}
+
+.encabezado__titulo { font-size: 24px; font-weight: 800; color: var(--color); line-height: 1.2; @include movil { font-size: 21px; } }
+.encabezado__antes { font-size: 12.5px; color: var(--texto-suave); margin-top: 2px; }
+.encabezado__subtitulo { margin-top: 10px; color: var(--texto); font-size: 15px; line-height: 1.5; }
+
+// ---------- Migas de pan ----------
+.migas { display: flex; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--texto-suave); }
+.migas__item { display: inline-flex; align-items: center; }
+.migas a { color: var(--texto-suave); padding: 2px 0; }
+.migas__sep { margin: 0 4px; opacity: .6; }
+
+// ---------- Tarjetas ----------
+.tarjeta {
+  --color: var(--azul);
+  background: #fff;
+  border-radius: var(--radio);
+  padding: 20px;
+  box-shadow: var(--sombra);
+  border-top: 4px solid var(--color);
+
+  &--pagar { --color: var(--c-pagar); }
+  &--beneficios { --color: var(--c-beneficios); }
+  &--historial { --color: var(--c-historial); }
+  &--plano { border-top: 0; }
+
+  @include movil { padding: 16px; }
+}
+
+.tarjeta__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color);
+  margin-bottom: 4px;
+  .tarjeta--plano & { color: var(--texto); margin-bottom: 12px; }
+}
+
+.tarjeta__texto { font-size: 15px; line-height: 1.55; margin-bottom: 12px; }
+.tarjeta__resumen { display: flex; gap: 6px; align-items: center; color: var(--ok); font-weight: 700; margin: 8px 0 10px; font-size: 15px; }
+.tarjeta__acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+// ---------- Estados ----------
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  &--recibido, &--pagada { background: var(--ok-fondo); color: var(--ok); }
+  &--en-camino, &--pendiente, &--info { background: var(--azul-claro); color: var(--azul); }
+  &--atencion, &--vencida { background: var(--error-fondo); color: var(--error); }
+}
+
+.tipo-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  white-space: nowrap;
+
+  &--cobro { background: #fdecea; color: #a8321f; }
+  &--interes { background: var(--aviso-fondo); color: var(--aviso); }
+  &--pago { background: var(--c-movimientos-fondo); color: var(--c-movimientos); }
+  &--beneficio { background: var(--ok-fondo); color: var(--ok); }
+}
+
+// ---------- Avisos ----------
+.aviso {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  border: 1.5px dashed currentColor;
+
+  p { color: var(--texto); }
+  a { font-weight: 700; color: inherit; }
+
+  &--historial { color: var(--c-historial); background: var(--c-historial-fondo); }
+  &--movimientos { color: var(--c-movimientos); background: var(--c-movimientos-fondo); }
+  &--ok { color: var(--ok); background: var(--ok-fondo); border-style: solid; }
+}
+
+// ---------- Tooltip ----------
+.tooltip { display: inline-flex; align-items: center; gap: 3px; }
+
+.tooltip__boton {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: -4px -4px -4px 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--azul);
+  &:hover, &[aria-expanded='true'] { background: var(--azul-claro); }
+}
+
+.tooltip__burbuja {
+  position: fixed;
+  z-index: 60;
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #18222e;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: normal;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+}
+
+.tooltip__titulo { display: block; margin-bottom: 3px; font-weight: 700; color: var(--oro); }
+
+// ---------- Modal ----------
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(10, 20, 32, .5);
+
+  @include movil { place-items: end center; padding: 0; }
+}
+
+.modal__caja {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px 20px 20px;
+
+  @include movil { border-radius: 18px 18px 0 0; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+}
+
+.modal__cabecera { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.modal__titulo { font-size: 18px; font-weight: 700; }
+.modal__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+  &--form { margin-top: 4px; }
+}
+
+// ---------- Formularios ----------
+.formulario { display: flex; flex-direction: column; gap: 14px; }
+
+.formulario__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+
+  input, select, textarea {
+    padding: 11px 12px;
+    border: 1.5px solid #c4cfdb;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 400;
+    color: var(--texto);
+    &:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px var(--azul-claro); }
+    &[aria-invalid='true'] { border-color: var(--error); }
+  }
+
+  textarea { resize: vertical; }
+}
+
+.formulario__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// ---------- Desglose (lista de montos) ----------
+.desglose { margin: 0; }
+
+.desglose__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 14.5px;
+
+  dt { color: var(--texto-suave); }
+  dd { margin: 0; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+
+  &--resta dd { color: var(--ok); }
+  &--total { border-bottom: 0; dt, dd { color: var(--texto); font-weight: 800; } }
+  &--total + .desglose__fila { border-top: 1px solid var(--borde); }
+}
+
+.desglose--centrado { max-width: 380px; width: 100%; margin: 16px auto 0; text-align: left; }
+
+// ---------- Filtros ----------
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 20px;
+}
+
+.filtros__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--texto-suave);
+
+  select {
+    padding: 9px 12px;
+    border: 1.5px solid #c4cfdb;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--texto);
+    font-weight: 600;
+    min-width: 210px;
+  }
+}
+
+.filtros__chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.filtro-chip {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: 1.5px solid #c4cfdb;
+  border-radius: 20px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--texto);
+
+  &--activo { background: var(--azul); border-color: var(--azul); color: #fff; }
+}
+
+// ---------- Pestañas ----------
+.pestanas {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.pestanas__pestana {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 16px;
+  border: 1.5px solid #cdc3e4;
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+
+  &--activa {
+    background: var(--c-historial);
+    border-color: var(--c-historial);
+    color: #fff;
+    .pestanas__etiqueta { color: #e6dcfa; }
+  }
+}
+
+.pestanas__etiqueta { font-size: 11.5px; font-weight: 600; color: var(--c-historial); }
+
+// ---------- Desplegar ----------
+.desplegar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: var(--azul);
+  font-weight: 700;
+  font-size: 14px;
+
+  .icono { transition: transform .15s; }
+}
+
+.desplegar__icono--abierto { transform: rotate(90deg); }
+
+// ---------- Leyenda y barras ----------
+.barra-apilada {
+  display: flex;
+  height: 14px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #e9e3f3;
+  margin: 16px 0 8px;
+}
+
+.barra-apilada__parte {
+  display: block;
+  height: 100%;
+  &--tu { background: var(--c-historial); }
+  &--beneficio { background: #4cb782; }
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 13px;
+  color: var(--texto-suave);
+  margin-bottom: 14px;
+}
+
+.leyenda__punto {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: -1px;
+  &--tu { background: var(--c-historial); }
+  &--beneficio { background: #4cb782; }
+  &--pendiente { background: #e9e3f3; }
+}
+
+.vacio { text-align: center; color: var(--texto-suave); padding: 24px; background: #fff; border-radius: var(--radio); }
