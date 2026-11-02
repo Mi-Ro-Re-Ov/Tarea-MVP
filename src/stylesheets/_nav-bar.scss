@@ -1,0 +1,92 @@
+// Escritorio: pestañas bajo la cabecera. Móvil: barra inferior fija.
+.nav-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--borde);
+
+  @include movil {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    border-bottom: 0;
+    border-top: 1px solid var(--borde);
+    box-shadow: 0 -4px 16px rgba(16, 32, 51, .06);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.nav-bar__contenido {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+
+  @include movil {
+    padding: 0;
+    justify-content: space-around;
+  }
+}
+
+.nav-bar__link {
+  --color: var(--c-inicio);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 14px 12px;
+  border-bottom: 3px solid transparent;
+  color: var(--texto-suave);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+
+  &:hover { color: var(--texto); }
+
+  &--pagar { --color: var(--c-pagar); }
+  &--cuenta { --color: var(--c-cuenta); }
+  &--beneficios { --color: var(--c-beneficios); }
+
+  &--activo {
+    color: var(--color);
+    border-bottom-color: var(--color);
+  }
+
+  @include movil {
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 4px 8px;
+    font-size: 11.5px;
+    border-bottom: 0;
+    border-top: 3px solid transparent;
+
+    &--activo { border-top-color: var(--color); }
+  }
+}
+
+.nav-bar__icono { position: relative; display: inline-flex; }
+.nav-bar__link--pagar { @include escritorio { gap: 14px; } }
+
+.nav-bar__globo {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--c-pagar);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+}
+
+.nav-bar__texto--corto { display: none; }
+
+@include movil {
+  .nav-bar__texto--largo { display: none; }
+  .nav-bar__texto--corto { display: inline; }
+}

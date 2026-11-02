@@ -1,0 +1,47 @@
+$movil: 760px;
+
+:root {
+  --azul: #0b3a5d;
+  --azul-oscuro: #072a44;
+  --azul-claro: #e7eff6;
+  --oro: #d4a72c;
+  --texto: #1c2733;
+  --texto-suave: #5a6778;
+  --borde: #dde3ea;
+  --fondo: #f3f5f8;
+  --blanco: #ffffff;
+  --ok: #217a4b;
+  --ok-fondo: #e3f4ea;
+  --aviso: #a15c00;
+  --aviso-fondo: #fdf1dc;
+  --error: #b42318;
+  --error-fondo: #fde8e6;
+
+  // Color propio de cada sección (diferenciación visual, H3)
+  --c-pagar: #b5650d;
+  --c-pagar-fondo: #fdf0e1;
+  --c-historial: #6a3fb5;
+  --c-historial-fondo: #f1eafb;
+  --c-movimientos: #0b7a7a;
+  --c-movimientos-fondo: #e2f4f3;
+  --c-beneficios: #217a4b;
+  --c-beneficios-fondo: #e3f4ea;
+  --c-banco: #375a8c;
+  --c-banco-fondo: #e6edf7;
+  --c-cuenta: #0b3a5d;
+  --c-cuenta-fondo: #e7eff6;
+  --c-ayuda: #4b5563;
+  --c-ayuda-fondo: #eef0f3;
+  --c-inicio: #0b3a5d;
+
+  --radio: 14px;
+  --sombra: 0 1px 2px rgba(16, 32, 51, .06), 0 4px 14px rgba(16, 32, 51, .06);
+}
+
+@mixin movil {
+  @media (max-width: $movil) { @content; }
+}
+
+@mixin escritorio {
+  @media (min-width: $movil + 1) { @content; }
+}

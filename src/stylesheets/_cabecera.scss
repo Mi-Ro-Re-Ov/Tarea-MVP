@@ -1,0 +1,207 @@
+.cabecera {
+  background: var(--azul);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 3px solid var(--oro);
+}
+
+.cabecera__contenido {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include movil { padding: 8px 12px 8px 16px; }
+}
+
+.cabecera__marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cabecera__sello {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--oro);
+  color: var(--azul-oscuro);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .5px;
+
+  &--grande { width: 56px; height: 56px; font-size: 17px; border-radius: 14px; }
+}
+
+.cabecera__marca-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  strong { font-size: 16px; }
+  span { font-size: 12px; opacity: .8; }
+}
+
+.cabecera__acciones { display: flex; align-items: center; gap: 4px; }
+
+.cabecera__boton {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  &:hover { background: rgba(255, 255, 255, .12); }
+
+  &--escritorio { @include movil { display: none; } }
+}
+
+.cabecera__globo {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #e5484d;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  border: 2px solid var(--azul);
+  box-sizing: content-box;
+}
+
+.cabecera__usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border: 0;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-weight: 600;
+  margin-left: 4px;
+  &:hover { background: rgba(255, 255, 255, .18); }
+  @include movil { padding: 4px; }
+}
+
+.cabecera__avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--azul);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.cabecera__nombre { @include movil { display: none; } }
+
+// ---------- Desplegables (notificaciones y usuario) ----------
+.desplegable { position: relative; }
+
+.desplegable__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 260px;
+  background: #fff;
+  color: var(--texto);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(16, 32, 51, .22);
+  padding: 8px;
+  z-index: 40;
+
+  &--ancho {
+    width: 360px;
+    @include movil { position: fixed; left: 12px; right: 12px; top: 64px; width: auto; }
+  }
+}
+
+.desplegable__cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px 10px;
+  border-bottom: 1px solid var(--borde);
+  margin-bottom: 4px;
+  .enlace-boton { font-size: 13px; }
+}
+
+.desplegable__perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px 12px;
+  border-bottom: 1px solid var(--borde);
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--texto-suave);
+  strong { color: var(--texto); font-size: 14px; }
+}
+
+.desplegable__opcion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--texto);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  &:hover { background: var(--fondo); }
+}
+
+.notificaciones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.notificaciones__item {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  text-align: left;
+  &:hover { background: var(--fondo); }
+  &--nueva { background: var(--azul-claro); .notificaciones__texto { font-weight: 600; } }
+}
+
+.notificaciones__punto {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+  &--beneficio { background: var(--c-beneficios); }
+  &--pago { background: var(--c-movimientos); }
+  &--aviso { background: var(--c-pagar); }
+}
+
+.notificaciones__texto { display: block; font-size: 14px; line-height: 1.4; }
+.notificaciones__fecha { display: block; font-size: 12px; color: var(--texto-suave); margin-top: 2px; }
